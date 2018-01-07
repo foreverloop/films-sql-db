@@ -21,3 +21,22 @@ COPY(SELECT city.city,COUNT(address.address_id) FROM customer
 	GROUP BY city.city 
 	ORDER BY COUNT(address.address_id) DESC LIMIT 5)
 TO 'most_common_cities.csv' (format CSV);
+
+--select a count of each of the different types of film
+COPY(SELECT COUNT(film.title),category.name 
+FROM category 
+LEFT JOIN film_category ON film_category.category_id = category.category_id 
+LEFT JOIN film ON film.film_id = film_category.film_id 
+GROUP BY category.name ORDER BY COUNT(film.title) ASC)
+TO 'category_counts.csv' (format CSV);
+
+--find the most profitable film type (also include how many of each type of film)
+COPY(SELECT category.name, COALESCE(SUM(payment.amount),0) category_value,COUNT(film.title)
+FROM payment 
+INNER JOIN rental ON rental.rental_id = payment.rental_id 
+INNER JOIN inventory ON inventory.inventory_id = rental.inventory_id
+INNER JOIN film ON inventory.film_id = film.film_id 
+INNER JOIN film_category ON film_category.film_id = inventory.film_id 
+INNER JOIN category ON film_category.category_id = category.category_id 
+GROUP BY category.name ORDER BY COALESCE(SUM(payment.amount),0) DESC,COUNT(film.title) ASC)
+TO 'most_profitable.csv' (format CSV);
