@@ -1,7 +1,7 @@
 from matplotlib import pyplot as plt
 import pandas as pd
 
-df = pd.read_csv('most_common_actors.csv')
+df = pd.read_csv('csv/most_common_actors.csv')
 num_appears = df['num_appear']
 first_names = df['first_name']
 last_names = df['last_name']
@@ -18,7 +18,7 @@ plt.ylabel('Number of Appearances')
 plt.title('Most Common Actors')
 plt.show()
 
-df2 = pd.read_csv('most_common_cities.csv')
+df2 = pd.read_csv('csv/most_common_cities.csv')
 city = df2['city']
 count = df2['count']
 

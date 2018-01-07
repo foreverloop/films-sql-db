@@ -2,7 +2,7 @@
 from matplotlib import pyplot as plt
 import pandas as pd
 
-df = pd.read_csv('film_category_by_count.csv')
+df = pd.read_csv('csv/film_category_by_count.csv')
 
 counts = df['count']
 categories = df['category']

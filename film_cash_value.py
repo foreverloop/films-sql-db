@@ -2,7 +2,7 @@ from scipy.stats import pearsonr
 from matplotlib import pyplot as plt
 import pandas as pd
 
-df = pd.read_csv('most_profitable.csv')
+df = pd.read_csv('csv/most_profitable.csv')
 
 categories = df['category']
 price_values = df['value']
